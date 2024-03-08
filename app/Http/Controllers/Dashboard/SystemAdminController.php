@@ -15,24 +15,38 @@ class SystemAdminController extends Controller {
     public function index() {
         $allusers = User::all();
 
+        $allSystemEmployees = User::where('usertype', 'system')->get();
+
         $pendingCompanies = User::where('usertype', 'company')
             ->where('verify', 'pending')
             ->get();
+        $allCompanies = User::where('usertype', 'company')->get();
 
         $visibleBanners = Banner::where('status', '1')->get();
         $invisibleBanners = Banner::where('status', '0')->get();
 
         $logoName = LogoName::latest()->first();
 
-        return view('dashboard.system.dashboard', compact('allusers', 'pendingCompanies', 'visibleBanners', 'invisibleBanners', 'logoName'));
+        return view('dashboard.system.dashboard', compact('allSystemEmployees', 'allCompanies', 'allusers', 'pendingCompanies', 'visibleBanners', 'invisibleBanners', 'logoName'));
     }
 
-    public function updateVerifyStatus($encryptedCompanyId) {
+    public function updateRole(Request $request, $id) {
+        $employee = User::findOrFail($id);
 
+        $employee->role = $request->input('role');
+        $employee->save();
+
+        return redirect()->back()->with('success', 'Role updated successfully');
+    }
+
+    public function toggleVerifyStatus(Request $request, $encryptedCompanyId) {
         $userId = Crypt::decrypt($encryptedCompanyId);
         $user = User::findOrFail($userId);
-        $user->update(['verify' => 'verified']);
-        return back()->with('status', 'verify status updated successfully');
+
+        $user->verify = $user->verify === 'verified' ? 'pending' : 'verified';
+        $user->save();
+
+        return redirect()->back()->with('success', 'Verification status updated successfully.');
     }
 
     public function CreateBanner(Request $request) {
@@ -105,6 +119,10 @@ class SystemAdminController extends Controller {
         // If a record exists, update its data
         if ($existingLogoName) {
             $existingLogoName->name = $request->input('name');
+            $existingLogoName->history = $request->input('history');
+            $existingLogoName->vision = $request->input('vision');
+            $existingLogoName->aboutbanner = $request->input('aboutbanner');
+            $existingLogoName->jobbanner = $request->input('jobbanner');
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -123,6 +141,10 @@ class SystemAdminController extends Controller {
         $logoname = new LogoName;
 
         $logoname->name = $request->input('name');
+        $logoname->history = $request->input('history');
+        $logoname->vision = $request->input('vision');
+        $logoname->aboutbanner = $request->input('aboutbanner');
+        $logoname->jobbanner = $request->input('jobbanner');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

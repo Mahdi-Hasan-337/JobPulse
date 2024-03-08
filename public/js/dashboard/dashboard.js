@@ -2,10 +2,18 @@ var dashboardToggleButton = document.getElementById("menu-toggle-1");
 var analyticsToggleButton = document.getElementById("menu-toggle-2");
 var feedbackToggleButton = document.getElementById("menu-toggle-3");
 var logochangeToggleButton = document.getElementById("menu-toggle-4");
+var TopDashboardToggleButton = document.getElementById("menu-toggle-5");
+var EmployeeToggleButton = document.getElementById("menu-toggle-6");
 var notification1ToggleButton = document.getElementById("notification1-menu-toggle");
 var notification2ToggleButton = document.getElementById("notification2-menu-toggle");
 var el = document.getElementById("wrapper");
 
+TopDashboardToggleButton.onclick = function () {
+    el.classList.toggle("toggled");
+};
+EmployeeToggleButton.onclick = function () {
+    el.classList.toggle("toggled");
+};
 dashboardToggleButton.onclick = function () {
     el.classList.toggle("toggled");
 };
@@ -41,6 +49,14 @@ document.querySelector('.list-group-item[href="#content-wrapper-4"]').addEventLi
     toggleContent('content-wrapper-4');
 });
 
+document.querySelector('.list-group-item[href="#content-wrapper-5"]').addEventListener('click', function () {
+    toggleContent('content-wrapper-5');
+});
+
+document.querySelector('.list-group-item[href="#content-wrapper-6"]').addEventListener('click', function () {
+    toggleContent('content-wrapper-6');
+});
+
 document.querySelector('.list-group-item[href="#notification1-content-wrapper"]').addEventListener('click',
     function () {
         toggleContent('notification1-content-wrapper');
@@ -56,6 +72,8 @@ function toggleContent(contentId) {
     document.getElementById('content-wrapper-2').style.display = 'none';
     document.getElementById('content-wrapper-3').style.display = 'none';
     document.getElementById('content-wrapper-4').style.display = 'none';
+    document.getElementById('content-wrapper-5').style.display = 'none';
+    document.getElementById('content-wrapper-6').style.display = 'none';
     document.getElementById('notification1-content-wrapper').style.display = 'none';
     document.getElementById('notification2-content-wrapper').style.display = 'none';
 

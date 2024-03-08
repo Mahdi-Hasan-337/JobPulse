@@ -2,7 +2,6 @@
 
 @section('contact')
     @include('components.nav')
-    @include('components.banner')
-    @include('components.error')
+    @include('components.job-banner')
     @include('components.footer')
 @endsection

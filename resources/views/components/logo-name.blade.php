@@ -8,7 +8,7 @@
         src="{{ asset('images/campusdotcrew.jpg') }}" alt="Default Avatar">
 @endif
 
-@if (!empty($logoName->image))
+@if (!empty($logoName->name))
     <a class="navbar-brand logo-name mx-1" href="#">{{ $logoName->name }}</a>
 @else
     <a class="navbar-brand logo-name mx-1" href="#">JobPulse</a>

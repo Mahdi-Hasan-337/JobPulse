@@ -16,15 +16,32 @@
                             class="block mt-1 w-full form-control" name="name" value="{{ $logoName->name ?? '' }}">
                     </div>
 
-                    @if (!empty($logoName->image))
-                        <img class="my-4 d-flex justify-content-center"
-                            style="width: 100px; height: 100px; object-fit: cover; border: 2px solid black;"
-                            src="{{ asset('uploads/' . $logoName->image) }}" alt="">
-                    @endif
                     {{--  --}}
                     <div class="mb-4">
                         <input type="file" class="block mt-1 w-full form-control" id="image" name="image"
-                            required class="form-control">
+                            class="form-control">
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" id="history" placeholder="Enter history"
+                            class="block mt-1 w-full form-control" name="history"
+                            value="{{ $logoName->history ?? '' }}">
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" id="vision" placeholder="Enter vision"
+                            class="block mt-1 w-full form-control" name="vision" value="{{ $logoName->vision ?? '' }}">
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" id="aboutbanner" placeholder="Enter aboutbanner"
+                            class="block mt-1 w-full form-control" name="aboutbanner"
+                            value="{{ $logoName->aboutbanner ?? '' }}">
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" id="jobbanner" placeholder="Enter jobbanner"
+                            class="block mt-1 w-full form-control" name="jobbanner" value="{{ $logoName->jobbanner ?? '' }}">
                     </div>
 
                     <button class="button" name="register_btn">Submit</button>

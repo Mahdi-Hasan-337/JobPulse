@@ -12,6 +12,10 @@ return new class extends Migration {
         Schema::create('logo_names', function (Blueprint $table) {
             $table->id();
             $table->mediumText('name')->nullable();
+            $table->string('history')->nullable();
+            $table->string('vision')->nullable();
+            $table->string('aboutbanner')->nullable();
+            $table->string('jobbanner')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

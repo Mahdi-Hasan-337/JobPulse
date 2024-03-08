@@ -3,6 +3,7 @@
 @section('contact')
     @include('components.nav')
     @include('components.banner')
-    @include('components.error')
+    @include('components.history')
+    @include('components.vision')
     @include('components.footer')
 @endsection

@@ -13,11 +13,11 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="{{ Route('about') }}">About</a>
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Job</a>
+                    <a class="nav-link" href="{{ Route('jobs') }}">Job</a>
                 </li>
                 </li>
                 <li class="nav-item">
@@ -29,6 +29,22 @@
                 </li>
                 @if (Route::has('login'))
                     @auth
+                        @if (Auth::user()->usertype === 'system')
+                            <li class="nav-item">
+                                <a class="nav-link" href={{ route('system.superadmin.dashboard') }}>Dashboard</a>
+                            </li>
+                        @elseif (Auth::user()->usertype === 'company')
+                            <li class="nav-item">
+                                <a class="nav-link" href={{ route('company.dashboard') }}>Dashboard</a>
+                            </li>
+                        @elseif (Auth::user()->usertype === 'candidate')
+                            <li class="nav-item">
+                                <a class="nav-link" href={{ route('candidate.dashboard') }}>Dashboard</a>
+                            </li>
+                        @else
+                            <p></p>
+                        @endif
+
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button class="col-lg-4 btn btn-primary" type="submit">Logout</button>
@@ -36,7 +52,6 @@
                     @else
                         <a class="login-btn my-1 mx-1" data-bs-toggle="modal" href="#LoginModal" role="button">Login</a>
                         @include('auth.login')
-
 
                         @if (Route::has('register'))
                             <a class="reg-btn my-1 mx-1" data-bs-target="#RegisterModal" data-bs-toggle="modal"

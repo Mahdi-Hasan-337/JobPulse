@@ -1,18 +1,22 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Auth\PasswordlessAuthenticationController;
 use App\Http\Controllers\Dashboard\CandidateAdminController;
 use App\Http\Controllers\Dashboard\ComapnyAdminController;
 use App\Http\Controllers\Dashboard\SystemAdminController;
+use App\Http\Controllers\JobsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/jobs', [JobsController::class, 'index'])->name('jobs');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -34,8 +38,12 @@ Route::middleware(['auth', 'usertype:system', 'role:superadmin'])->group(functio
     Route::get('system/superadmin/dashboard', [SystemAdminController::class, 'index'])->name('system.superadmin.dashboard');
 
     ///
-    Route::post('/system/superadmin/update-verify-status/{encryptedCompanyId}', [SystemAdminController::class, 'updateVerifyStatus'])
-        ->name('update.Verify.Status');
+    // Route::post('/system/superadmin/update-verify-status/{encryptedCompanyId}', [SystemAdminController::class, 'updateVerifyStatus'])
+    //     ->name('update.Verify.Status');
+    Route::post('/toggle-verify-status/{encryptedCompanyId}', [SystemAdminController::class, 'toggleVerifyStatus'])->name('toggleVerifyStatus');
+
+    // Route::put('/update-role/{id}', 'EmployeeController@updateRole')->name('updateRole');
+    Route::put('/update-role/{id}', [SystemAdminController::class, 'updateRole'])->name('updateRole');
 
     ///
     Route::post('/add-carousel-slide', [SystemAdminController::class, 'CreateBanner'])->name('addBanner');
@@ -58,3 +66,5 @@ Route::middleware(['auth', 'usertype:company', 'role:member'])->group(function (
 Route::middleware(['auth', 'usertype:candidate', 'role:member'])->group(function () {
     Route::get('candidate/dashboard', [CandidateAdminController::class, 'index'])->name('candidate.dashboard');
 });
+
+Route::put('/toggle-verify-status/{encryptedCompanyId}', [SystemAdminController::class, 'updateVerifyStatus'])->name('toggle.Verify.Status');
