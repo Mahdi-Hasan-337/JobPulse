@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\CandidateAdminController;
 use App\Http\Controllers\Dashboard\ComapnyAdminController;
 use App\Http\Controllers\Dashboard\SystemAdminController;
 use App\Http\Controllers\JobsController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,9 @@ Route::middleware(['auth', 'usertype:system', 'role:superadmin'])->group(functio
 
 Route::middleware(['auth', 'usertype:company', 'role:member'])->group(function () {
     Route::get('company/dashboard', [ComapnyAdminController::class, 'index'])->name('company.dashboard');
+    Route::post('/job-store', [ComapnyAdminController::class, 'storeJob'])->name('jobs.store');
+    Route::put('/jobs/{job}', [ComapnyAdminController::class, 'updateJob'])->name('jobs.update');
+    Route::delete('/jobs/{id}', [ComapnyAdminController::class, 'destroy'])->name('jobs.destroy');
 });
 
 Route::middleware(['auth', 'usertype:candidate', 'role:member'])->group(function () {
@@ -68,3 +72,5 @@ Route::middleware(['auth', 'usertype:candidate', 'role:member'])->group(function
 });
 
 Route::put('/toggle-verify-status/{encryptedCompanyId}', [SystemAdminController::class, 'updateVerifyStatus'])->name('toggle.Verify.Status');
+
+Route::post('/portfolios', [PortfolioController::class, 'store'])->name('portfolios.store');

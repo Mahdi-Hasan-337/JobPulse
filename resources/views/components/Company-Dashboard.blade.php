@@ -1,30 +1,32 @@
-<div class="col-4">
+<div class="col-4 px-4">
     <div class="card text-center">
         <div class="card-header">
-            Total Number of Companies
+            Job Post
         </div>
         <div class="card-body">
-            {{ count($allCompanies) }}
+            {{ count($jobs) }}
         </div>
     </div>
 </div>
-<div class="col-4">
+
+<div class="col-4 px-4">
     <div class="card text-center">
         <div class="card-header">
-            Total Number of Pending Companies
+            Employee
         </div>
         <div class="card-body">
-            {{ count($pendingCompanies) }}
+            {{ count($companyEmployees) }}
         </div>
     </div>
 </div>
-<div class="col-4">
+
+<div class="col-4 px-4">
     <div class="card text-center">
         <div class="card-header">
-            Total Number of Jobs
+            Job Posted
         </div>
         <div class="card-body">
-            {{ count($pendingCompanies) }}
+            {{ count($jobs) }}
         </div>
     </div>
 </div>
