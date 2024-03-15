@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
 
@@ -29,4 +30,6 @@ class PortfolioController extends Controller {
             return redirect()->back()->with('success', 'Portfolio created successfully');
         }
     }
+
+    
 }

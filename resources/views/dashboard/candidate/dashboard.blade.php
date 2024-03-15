@@ -266,4 +266,18 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="{{ asset('js/dashboard/dashboard.js') }}"></script>
+
+    <script>
+        let educationCount = 1;
+
+        function addEducation() {
+            let newField = `<div>
+                                <input type="text" name="education[${educationCount}][degree]" placeholder="Degree">
+                                <input type="text" name="education[${educationCount}][institution]" placeholder="Institution">
+                                <!-- other fields -->
+                            </div>`;
+            document.getElementById('education_fields').innerHTML += newField;
+            educationCount++;
+        }
+    </script>
 @endsection

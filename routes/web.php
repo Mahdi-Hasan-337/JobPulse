@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AppliesController;
 use App\Http\Controllers\Auth\PasswordlessAuthenticationController;
 use App\Http\Controllers\Dashboard\CandidateAdminController;
 use App\Http\Controllers\Dashboard\ComapnyAdminController;
@@ -74,3 +75,6 @@ Route::middleware(['auth', 'usertype:candidate', 'role:member'])->group(function
 Route::put('/toggle-verify-status/{encryptedCompanyId}', [SystemAdminController::class, 'updateVerifyStatus'])->name('toggle.Verify.Status');
 
 Route::post('/portfolios', [PortfolioController::class, 'store'])->name('portfolios.store');
+
+Route::get('/jobs/{job}', [WelcomeController::class, 'show'])->name('jobs.show');
+Route::post('/applies', [AppliesController::class, 'store'])->name('applies.store');
